@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Brewerlog2</title>
+  <%= stylesheet_link_tag    "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+  <style type="text/css">
+    body {
+      padding-top: 60px;
+    }
+  </style>
+</head>
+
+<body>
+
+	<%= render :partial => 'layouts/topbar' %>
+	
+	<div class="container">		
+    	<div class="content">
+	
+			<%= render :partial => 'layouts/hero-unit' %>
+
+ 			<div class="row">
+					<%= yield %>
+			</div>
+			
+		</div>
+
+		<%= render :partial => 'layouts/footer' %>
+		
+    	</div>
+	</div>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+<div class="topbar">
+  <div class="topbar-inner">
+    <div class="container-fluid">
+		<%= link_to root_path, :class => 'brand' do %>
+			BrewerLog
+		<% end %>
+      <ul class="nav">
+        <li class="active"><%= link_to "Home", root_path %></li>
+		<li><%= link_to 'New Recipe', new_recipe_path %></li>
+		<li><%= link_to 'All Recipes', recipes_path  %>	
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <p class="pull-right">Logged in as <a href="#">username</a></p>
+    </div>
+  </div>
+</div>

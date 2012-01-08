@@ -1,0 +1,28 @@
+<!-- Example row of columns -->
+<div class="span5">
+	<h2>Recent Recipes</h2>
+	<dl>
+	<% @latest_recipes.each do |recipe| %>
+		<dt><%= recipe.name %></dt>
+		<dd><%= recipe.updated_at %></dd>
+	<% end %>
+	</dl>
+</div>
+<div class="span6">
+	<script type="text/javascript"><!--
+	google_ad_client = "ca-pub-1887777171105123";
+	/* Center Bottom Med. Rectangle */
+	google_ad_slot = "6833898583";
+	google_ad_width = 300;
+	google_ad_height = 250;
+	//-->
+	</script>
+	<script type="text/javascript"
+	src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+	</script>
+</div>
+<div class="span5">
+	<h2>Heading</h2>
+	<p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+	<p><a class="btn" href="#">View details &raquo;</a></p>
+</div>
