@@ -21,6 +21,19 @@
 	
 			<%= render :partial => 'layouts/hero-unit' %>
 
+
+			<% if notice %>
+				<div class="alert-message info">
+					<%= notice %>
+				</div>
+			<% end %>
+				
+			<% if alert %>
+				<div class="alert-message block-message warning">
+		    		<%= alert %>
+				</div>
+			<% end %>
+
  			<div class="row">
 					<%= yield %>
 			</div>

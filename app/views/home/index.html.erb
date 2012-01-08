@@ -3,8 +3,8 @@
 	<h2>Recent Recipes</h2>
 	<dl>
 	<% @latest_recipes.each do |recipe| %>
-		<dt><%= recipe.name %></dt>
-		<dd><%= recipe.updated_at %></dd>
+		<dt><%= link_to recipe.name, recipe_path(:id => recipe.id) %></dt>
+		<dd><%= recipe.updated_at.in_time_zone('EST').to_formatted_s(:long_ordinal)  %> by <%= recipe.user_id || "Guest" %></dd>
 	<% end %>
 	</dl>
 </div>

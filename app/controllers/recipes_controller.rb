@@ -1,4 +1,7 @@
 class RecipesController < ApplicationController
+  
+  before_filter :authenticate_user!, :except => [:index, :show]
+  
   # GET /recipes
   # GET /recipes.json
   def index
@@ -76,7 +79,7 @@ class RecipesController < ApplicationController
     @recipe.destroy
 
     respond_to do |format|
-      format.html { redirect_to recipes_url }
+      format.html { redirect_to recipes_url, alert: 'Recipe was successfully destroyed.' }
       format.json { head :ok }
     end
   end
