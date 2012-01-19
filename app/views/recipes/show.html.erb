@@ -8,9 +8,10 @@
 	  <b>Content:</b>
 	  <%= @recipe.content %>
 	</p>
-
-
-	<%= link_to 'Edit', edit_recipe_path(@recipe) %> |
-	<%= link_to 'Back', recipes_path %>
+	
+	<p>
+	  <b>Public:</b>
+	  <%= @recipe.public %>
+	</p>
 
 </div>
