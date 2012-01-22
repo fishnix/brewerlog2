@@ -3,6 +3,7 @@ Brewerlog2::Application.routes.draw do
 
   root :to => 'home#index'
 
+  match 'recipes/my' => 'recipes#my', :as => :my_recipes
   resources :recipes
 
   # The priority is based upon order of creation:

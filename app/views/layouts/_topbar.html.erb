@@ -9,7 +9,7 @@
 		<li><%= link_to 'Public Recipes', recipes_path  %>
 		<% if user_signed_in? %>
 			<li><%= link_to 'New Recipe', new_recipe_path %></li>
-			<li><%= link_to 'My Recipes', recipes_path  %>	
+			<li><%= link_to 'My Recipes', my_recipes_path  %>	
 		<% end %>
         <li><a href="#about">About</a></li>
         <li><a href="#contact">Contact</a></li>

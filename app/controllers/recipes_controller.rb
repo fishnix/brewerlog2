@@ -5,11 +5,20 @@ class RecipesController < ApplicationController
   # GET /recipes
   # GET /recipes.json
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.find_all_by_public(true)
 
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @recipes }
+    end
+  end
+  
+  # GET /recipes/my
+  def my
+    @recipes = Recipe.find_all_by_user_id(current_user.id)
+
+    respond_to do |format|
+      format.html # my.html.erb
     end
   end
 
@@ -38,17 +47,26 @@ class RecipesController < ApplicationController
   # GET /recipes/1/edit
   def edit
     @recipe = Recipe.find(params[:id])
+    
+    unless @recipe.user_id == current_user.id
+      respond_to do |format|
+        format.html { redirect_to recipes_url, alert: 'Forbidden' }
+        format.json { head :ok }
+      end
+      
+    end
   end
 
   # POST /recipes
   # POST /recipes.json
   def create
     @recipe = Recipe.new(params[:recipe])
+    @recipe.user_id = current_user.id
 
     respond_to do |format|
       if @recipe.save
-        format.html { redirect_to recipes_url, notice: 'Recipe was successfully created.' }
-        format.json { render json: recipes_url, status: :created, location: @recipe }
+        format.html { redirect_to my_recipes_url, notice: 'Recipe was successfully created.' }
+        format.json { render json: my_recipes_url, status: :created, location: @recipe }
       else
         format.html { render action: "new" }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
@@ -60,14 +78,16 @@ class RecipesController < ApplicationController
   # PUT /recipes/1.json
   def update
     @recipe = Recipe.find(params[:id])
-
-    respond_to do |format|
-      if @recipe.update_attributes(params[:recipe])
-        format.html { redirect_to @recipe, notice: 'Recipe was successfully updated.' }
-        format.json { head :ok }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @recipe.errors, status: :unprocessable_entity }
+    
+    if @recipe.user_id == current_user.id
+      respond_to do |format|
+        if @recipe.update_attributes(params[:recipe])
+          format.html { redirect_to my_recipes_url, notice: 'Recipe was successfully updated.' }
+          format.json { head :ok }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @recipe.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -76,11 +96,21 @@ class RecipesController < ApplicationController
   # DELETE /recipes/1.json
   def destroy
     @recipe = Recipe.find(params[:id])
-    @recipe.destroy
 
-    respond_to do |format|
-      format.html { redirect_to recipes_url, alert: 'Recipe was successfully destroyed.' }
-      format.json { head :ok }
+    if @recipe.user_id == current_user.id
+      
+      @recipe.destroy
+      
+      respond_to do |format|
+        format.html { redirect_to recipes_url, alert: 'Recipe was successfully destroyed.' }
+        format.json { head :ok }
+      end
+    else  
+      respond_to do |format|
+        format.html { redirect_to recipes_url, alert: 'Forbidden' }
+        format.json { head :ok }
+      end
+      
     end
   end
 end

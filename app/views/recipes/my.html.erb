@@ -1,17 +1,12 @@
 <div class="span16">
 
-	<h1>Listing recipes</h1>
+	<h1>My recipes</h1>
 
 	<table class="zebra-striped">
 		<thead>
 		  <tr>
 		    <th class="span4">Name</th>
-				<% if user_signed_in? %>
-					<th class="span6">Content</th>
-					<th class="span1">UserId</th>
-				<% else %>
-					<th class="span7">Content</th>
-				<% end %>
+		    <th class="span7">Content</th>
 		    <th class="span5"></th>
 		  </tr>
 		</thead>
@@ -20,14 +15,12 @@
 			  <tr>
 			    <td><%= recipe.name %></td>
 			    <td><%= recipe.content %></td>
-					<% if user_signed_in? %>
-						<td><%= recipe.user_id %></td>
-					<% end %>
 			    <td>
 						<%= render :partial => 'buttons', :locals => { :recipe => recipe } %>
 					</td>
 			  </tr>
 			<% end %>
+		</tbody>
 	</table>
 
 	<br />	
